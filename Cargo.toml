@@ -1,0 +1,11 @@
+[package]
+name = "rustc-llvm-proxy-example"
+version = "0.1.0"
+authors = ["Toshiki Teramura <toshiki.teramura@gmail.com>"]
+
+[dependencies]
+rustc-llvm-proxy = "0.1"
+
+[dependencies.llvm-sys]
+version = "60"
+features = ["no-llvm-linking"]
