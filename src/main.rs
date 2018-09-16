@@ -6,31 +6,13 @@ extern crate rustc_llvm_proxy;
 use llvm_sys::analysis::{LLVMVerifierFailureAction, LLVMVerifyModule};
 use llvm_sys::core::*;
 use llvm_sys::execution_engine::*;
-use llvm_sys::target;
 use std::ffi::CString;
 use std::os::raw::c_char;
-
-/// Initialise LLVM
-///
-/// Makes sure that the parts of LLVM we are going to use are
-/// initialised before we do anything with them.
-fn initialise_llvm() {
-    unsafe {
-        if target::LLVM_InitializeNativeTarget() != 0 {
-            panic!("Could not initialise target");
-        }
-        if target::LLVM_InitializeNativeAsmPrinter() != 0 {
-            panic!("Could not initialise ASM Printer");
-        }
-    }
-}
 
 fn main() {
     let llvm_error = 1;
     let val1 = 32;
     let val2 = 16;
-
-    initialise_llvm();
 
     // setup our builder and module
     let builder = unsafe { LLVMCreateBuilder() };
